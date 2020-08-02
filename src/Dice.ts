@@ -3,13 +3,17 @@ import Random from "./Random";
 import ISymbol from "./Symbol/ISymbol";
 
 export default class Dice {
-    readonly sides: Array<ISide>
+    readonly sides: ISide[]
 
-    constructor(...sides: Array<ISide>) {
+    constructor(...sides: ISide[]) {
         this.sides = sides;
     }
 
-    roll(): ISide {
-       return Random.getRandomFromArray(this.sides);
+    private getRandomSide(): ISide {
+        return Random.getRandomFromArray(this.sides);
+    }
+
+    roll(): ISymbol[] {
+        return this.getRandomSide().getValue();
     }
 }

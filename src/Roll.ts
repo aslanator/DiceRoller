@@ -1,6 +1,5 @@
 import Dice from "./Dice";
 import ISymbol from "./Symbol/ISymbol";
-import ISide from "./Side/ISide";
 
 export default class Roll {
     private readonly dices: Dice[];
@@ -10,16 +9,15 @@ export default class Roll {
     }
 
     roll(): string {
-        const sides = this.dices.map(dice => dice.roll());
-        return this.getSummedRandomValues(sides)
+        const symbols = this.dices.map(dice => dice.roll()).flat();
+        return this.getSummedRandomValues(symbols)
             .map((value: ISymbol) => value.toString())
             .filter(Boolean)
             .join(', ');
     }
 
-    private getGroupedRandomSideValue(sides: ISide[]):  Map<string, ISymbol[]> {
-        const symbols = sides.reduce((sides, side) => sides.concat(side.getValue()), [] as ISymbol[]);
-        return symbols.reduce((sum: Map<string, ISymbol[]>, symbol: ISymbol) => {
+    private getGroupedRandomSideValue(symbols: ISymbol[]):  Map<string, ISymbol[]> {
+        return symbols.reduce((sum, symbol) => {
             let symbols =  sum.get(symbol.getKey());
             if(symbols instanceof Array){
                 symbols.push(symbol);
@@ -31,8 +29,8 @@ export default class Roll {
         }, new Map());
     }
 
-    private getSummedRandomValues(sides: ISide[]): Array<ISymbol>  {
-        return Array.from(this.getGroupedRandomSideValue(sides).values()).map((values: Array<ISymbol>) => {
+    private getSummedRandomValues(symbols: ISymbol[]): ISymbol[]  {
+        return Array.from(this.getGroupedRandomSideValue(symbols).values()).map((values: ISymbol[]) => {
             return values.reduce((sum: ISymbol, symbol: ISymbol) => {
                 return sum.plus(symbol);
             })
