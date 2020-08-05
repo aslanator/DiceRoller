@@ -1,6 +1,7 @@
 import Dice from "./Dice";
 import ISymbol from "./Symbol/ISymbol";
-import Side from "./Side/Side";
+import NumberSymbol from "./Symbol/NumberSymbol";
+import _ from "lodash";
 
 export default class Roll {
     private readonly dices: Dice[];
@@ -32,9 +33,10 @@ export default class Roll {
 
     private getSummedRandomValues(symbols: ISymbol[]): ISymbol[]  {
         return Array.from(this.getGroupedRandomSideValue(symbols).values()).map((values: ISymbol[]) => {
+            values[0] = _.cloneDeep(values[0]);
             return values.reduce((sum: ISymbol, symbol: ISymbol) => {
                 return sum.plus(symbol);
-            })
+            });
         });
     }
 
