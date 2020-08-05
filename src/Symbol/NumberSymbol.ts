@@ -1,4 +1,7 @@
 import ISymbol from "./ISymbol";
+import Roll from "../Roll";
+import Dice from "../Dice";
+import ISide from "../Side/ISide";
 
 export default class NumberSymbol implements ISymbol {
     value: number;
@@ -20,4 +23,6 @@ export default class NumberSymbol implements ISymbol {
         return this.value.toString();
     }
 
+    onRolled(roll: Roll, dice: Dice, symbols: ISymbol[]): void {
+    }
 }

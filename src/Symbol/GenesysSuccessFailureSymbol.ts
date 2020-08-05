@@ -1,4 +1,7 @@
 import ISymbol from "./ISymbol";
+import Roll from "../Roll";
+import Dice from "../Dice";
+import ISide from "../Side/ISide";
 
 export default class GenesysSuccessFailureSymbol implements ISymbol {
     value: number;
@@ -24,4 +27,5 @@ export default class GenesysSuccessFailureSymbol implements ISymbol {
         return '';
     }
 
+    onRolled(roll: Roll, dice: Dice, symbols: ISymbol[]): void {}
 }

@@ -12,4 +12,9 @@ export default class NumberSide implements ISide{
     getValue(): Array<ISymbol> {
         return this.value;
     }
+
+    addSymbol(symbol: ISymbol): this {
+        this.value.push(symbol);
+        return this;
+    }
 }

@@ -1,5 +1,6 @@
 import Dice from "./Dice";
 import ISymbol from "./Symbol/ISymbol";
+import Side from "./Side/Side";
 
 export default class Roll {
     private readonly dices: Dice[];
@@ -9,7 +10,7 @@ export default class Roll {
     }
 
     roll(): string {
-        const symbols = this.dices.map(dice => dice.roll()).flat();
+        const symbols = this.dices.map(this.getDiceRoll.bind(this)).flat();
         return this.getSummedRandomValues(symbols)
             .map((value: ISymbol) => value.toString())
             .filter(Boolean)
@@ -36,4 +37,12 @@ export default class Roll {
             })
         });
     }
+
+    private getDiceRoll(dice: Dice): ISymbol[] {
+        const roll = [...dice.roll()];
+        for(const symbol of roll) {
+            symbol.onRolled(this, dice, roll);
+        }
+        return roll;
+    };
 }
