@@ -40,10 +40,6 @@ export default class Roll {
     }
 
     private getDiceRoll(dice: Dice): ISymbol[] {
-        const roll = [...dice.roll()];
-        for(const symbol of roll) {
-            symbol.onRolled(this, dice, roll);
-        }
-        return roll;
+        return dice.roll();
     };
 }

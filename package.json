@@ -5,10 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@types/lodash": "^4.14.158",
-    "babel-loader": "^8.1.0",
-    "lodash": "^4.17.19",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -16,7 +13,11 @@
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-typescript": "^7.10.4",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "ts-loader": "^8.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "babel-loader": "^8.1.0"
   },
   "scripts": {
     "type-check": "tsc --noEmit",

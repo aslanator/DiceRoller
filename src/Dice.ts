@@ -1,11 +1,13 @@
 import ISide from "./Side/ISide";
 import Random from "./Random";
 import ISymbol from "./Symbol/ISymbol";
+import Eventable from "./Eventable/Eventable";
 
-export default class Dice {
+export default class Dice extends Eventable{
     readonly sides: ISide[]
 
     constructor(...sides: ISide[]) {
+        super();
         this.sides = sides;
     }
 
@@ -14,6 +16,8 @@ export default class Dice {
     }
 
     roll(): ISymbol[] {
-        return this.getRandomSide().getValue();
+        const symbols = this.getRandomSide().getValue();
+        this.dispatch('roll', {symbols, dice: this});
+        return symbols;
     }
 }
