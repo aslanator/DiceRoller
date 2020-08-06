@@ -1,5 +1,6 @@
 import ISide from "./ISide";
 import ISymbol from "../Symbol/ISymbol";
+import _ from "lodash";
 
 export default class Side implements ISide{
     readonly value: ISymbol[]
@@ -9,7 +10,7 @@ export default class Side implements ISide{
     }
 
     getValue(): Array<ISymbol> {
-        return this.value;
+        return _.cloneDeep(this.value);
     }
 
     addSymbol(symbol: ISymbol): this {

@@ -33,7 +33,6 @@ export default class Roll {
 
     private getSummedRandomValues(symbols: ISymbol[]): ISymbol[]  {
         return Array.from(this.getGroupedRandomSideValue(symbols).values()).map((values: ISymbol[]) => {
-            values[0] = _.cloneDeep(values[0]);
             return values.reduce((sum: ISymbol, symbol: ISymbol) => {
                 return sum.plus(symbol);
             });
