@@ -13,6 +13,20 @@ export default class Eventable {
         }
     }
 
+    removeEventListener(type: string, callback: Function): void;
+    removeEventListener(type: string): void;
+    removeEventListener(type: string, callback?: Function): void {
+        if(typeof callback !== 'undefined' && this.events.has(type)){
+            let eventsOfThisType = this.events.get(type);
+            if(typeof eventsOfThisType !== 'undefined'){
+                eventsOfThisType = eventsOfThisType.filter(event => event.callback !== callback);
+                this.events.set(type, eventsOfThisType);
+            }
+        }
+        else
+            this.events.delete(type);
+    }
+
     dispatch(type: string, args: Object) {
         const eventsOfThisType = this.events.get(type);
         if(typeof eventsOfThisType !== 'undefined'){

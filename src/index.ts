@@ -9,13 +9,17 @@ const dice = new Dice(
     new Side(new NumberSymbol(2)),
 );
 
-dice.addEventListener('roll', ({symbols, dice}: {symbols: ISymbol[], dice: Dice}) => {
+const explodeCallback = ({symbols, dice}: {symbols: ISymbol[], dice: Dice}) => {
     const sum = symbols.reduce((sum, symbol) => (
         sum.plus(symbol)
     ));
     if(sum.value > 1)
         symbols.push(...dice.roll());
-});
+};
+
+dice.addEventListener('roll', explodeCallback);
+
+dice.removeEventListener('roll', explodeCallback);
 
 const roll = new Roll(dice, dice);
 
